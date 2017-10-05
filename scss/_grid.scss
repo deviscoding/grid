@@ -29,7 +29,7 @@
 }
 
 @if feature(grid) {
-  .row, .form-group {
+  .row {
     position: relative;
     display: flex;
     // Even though this is the default for flex, it needs to be declared to avoid IE10 bugs
