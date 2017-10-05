@@ -1,0 +1,144 @@
+@import "../../base/scss/base";
+@import "grid-variables";
+
+// region ///////////////////////////////////////////////////////////////   Flex Mixins
+
+@mixin row-reverse() {
+  flex-direction: row-reverse;
+  flex-wrap: wrap-reverse
+}
+
+@mixin col-reverse() {
+  flex-direction: column-reverse;
+  flex-wrap: wrap-reverse
+}
+
+@mixin make-column($class, $col-number) {
+  .col-#{$class}-#{$col-number} {
+    flex-basis: (100% / $grid-columns) * $col-number;
+    max-width: ((100% / $grid-columns) * $col-number);
+  }
+}
+
+@mixin make-cols($class) {
+  @for $i from 1 through $grid-columns {
+    @include make-column($class,$i);
+  }
+}
+
+@mixin make-offset($class, $col-number) {
+.col-#{$class}-offset-#{$col-number} {
+  margin-left: ((100% / $grid-columns) * $col-number);
+}
+}
+
+@mixin make-offsets($class, $col-number: ($grid-columns - 1)) {
+  @if $col-number > 0 {
+    @include make-offsets($class, ($col-number - 1));
+    @include make-offset($class, $col-number);
+  } @else {
+    .col-#{$class}-offset-#{$col-number} {
+      margin-left: 0;
+    }
+  }
+}
+
+@mixin make-grid-column-base($bkps, $columns, $gutter) {
+  // Common properties for all breakpoints
+  %grid-column {
+    position: relative;
+    width: 100%;
+    min-height: 1px; // Prevent columns from collapsing when empty
+    padding-right: $gutter / 2;
+    padding-left:  $gutter / 2;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @each $breakpoint in map-keys($bkps) {
+    $infix: "-#{$breakpoint}";
+
+    // Allow columns to stretch full width below their breakpoints
+    @for $i from 1 through $columns {
+      .col#{$infix}-#{$i} {
+        @extend %grid-column;
+      }
+    }
+
+    .col#{$infix},
+    .col#{$infix}-auto {
+      @extend %grid-column;
+    }
+  }
+}
+
+@mixin make-flex-grid($class) {
+
+  .col-#{$class} {
+    flex-grow: 1;
+    flex-basis: 0;
+    max-width: 100%;
+  }
+
+  .col-#{$class}-auto {
+    flex: 0 0 auto;
+  }
+
+  @include make-cols($class);
+  @include make-offsets($class);
+}
+
+@mixin make-multi-column($viewport-size) {
+  @if $viewport-size == xs {
+    .row > .columns {
+      padding-left: $half-gutter-width;
+      padding-right: $half-gutter-width;
+    }
+  }
+  .columns {
+    @if $viewport-size == xs {
+      $columns: floor($grid-columns / ($grid-columns * 1));
+      column-count: $columns;
+      column-gap: $grid-gutter-width / 2;
+      padding: 0;
+      width: 100%;
+      margin-bottom: 0;
+      [class*="col-"] {
+        max-width: none;
+        flex-basis: auto;
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+    @if $viewport-size == sm {
+      $columns: floor($grid-columns / ($grid-columns * .5));
+      column-count: $columns;
+    }
+    @if $viewport-size == md {
+    }
+    @if $viewport-size == lg {
+      $columns: floor($grid-columns / ($grid-columns * .333333));
+      column-count: $columns;
+    }
+    @if $viewport-size == xl {
+      $columns: floor($grid-columns / ($grid-columns * .25));
+      column-count: $columns;
+    }
+  }
+}
+
+@mixin grid-responsive($bp) {
+  @if $bp != xs {
+    .container-#{$bp} {
+      max-width: container($bp);
+    }
+  }
+  @if feature(grid) {
+    // Flexbox Grid
+    @include make-flex-grid($bp);
+    // Multi-Column
+    @include make-multi-column($bp);
+  }
+}
+
+// endregion ////////////////////////////////////////////////////////////   End Flex Mixins

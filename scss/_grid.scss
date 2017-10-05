@@ -1,0 +1,80 @@
+
+@import "grid-variables";
+@import "grid-mixins";
+
+@if $enable-framework == false {
+/*!
+ * Strapless v1.6.1 Grid (http://github.com/strapless/strapless)
+ * Influenced by Bootstrap (http://getbootstrap.com) and Flexbox Grid (http://flexboxgrid.com)
+ * Licensed under MIT (https://github.com/strapless/strapless/blob/master/LICENSE)
+ */
+
+} @else {
+/*! Grid classes influenced Flexbox Grid (http://flexboxgrid.com) */
+
+}
+
+// region ///////////////////////////////////////////////////////////////   Grid Styles
+
+/* Customized Grid */
+.container, .container-fluid {
+  margin-left:   auto;
+  margin-right:  auto;
+  padding-left:  $half-gutter-width;
+  padding-right: $half-gutter-width;
+  width: 100%;
+}
+
+.container-fluid {
+  width: 100%;
+}
+
+@if feature(grid) {
+  .row, .form-group {
+    position: relative;
+    display: flex;
+    // Even though this is the default for flex, it needs to be declared to avoid IE10 bugs
+    // See - https://github.com/philipwalton/flexbugs#6-the-default-flex-value-has-changed
+    flex: 0 1 auto;
+    flex-wrap: wrap;
+    margin-right: -$half-gutter-width;
+    margin-left:  -$half-gutter-width;
+    &.reverse {
+      @include row-reverse;
+    }
+  }
+
+  .no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+
+    > .col,
+    > [class*="col-"] {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+
+  @include make-grid-column-base($grid-breakpoints,$grid-columns,$grid-gutter-width);
+
+}
+
+@if $enable-framework == false {
+  @each $bp, $min in $grid-breakpoints {
+    @if $min == 0 {
+      @include grid-responsive($bp);
+    } @else {
+      @media screen and (min-width: $min) {
+        @include grid-responsive($bp);
+      }
+    }
+  }
+}
+
+// endregion ////////////////////////////////////////////////////////////   End Grid Styles
+
+
+
+
+
+

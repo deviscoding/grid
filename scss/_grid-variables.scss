@@ -1,0 +1,15 @@
+@import "../../base/scss/base";
+
+$enable-framework: false !default;
+
+// region ///////////////////////////////////////////////////////////////   Sizing and Spacing
+
+// Grid Spacing
+$grid-columns:              12    !default;
+@if feature(touch) {
+  $grid-gutter-width:       3rem  !default;
+}
+$grid-gutter-width:         2rem  !default;
+$half-gutter-width:         $grid-gutter-width / 2 !default;
+
+// endregion ////////////////////////////////////////////////////////////   End Sizing and Spacing
