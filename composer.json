@@ -1,0 +1,25 @@
+{
+  "name": "strapless/grid",
+  "description": "Responsive grid classes utilizing CSS flexbox. Part of StrapLess framework, but usable as a standalone component.",
+  "keywords": [
+      "responsive",
+      "grid",
+      "container",
+      "sass",
+      "scss",
+      "strapless",
+      "css"
+  ],
+  "homepage": "https://www.github.com/strapless/grid",
+  "version": "1.0",
+  "authors": [
+      {
+          "name": "Aaron M Jones",
+          "homepage": "http://www.jonesiscoding.com"
+      }
+  ],
+  "license": "MIT",
+  "require": {
+    "strapless/base": "^1.0"
+  }
+}
