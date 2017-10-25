@@ -12,4 +12,17 @@ $grid-columns:              12    !default;
 $grid-gutter-width:         2rem  !default;
 $half-gutter-width:         $grid-gutter-width / 2 !default;
 
+// CSS Columns
+$column-gap:                $grid-gutter-width / 2 !default;
+$column-xs-gap:             $column-gap !default;
+$column-sm-gap:             $column-gap !default;
+$column-lg-gap:             $column-gap !default;
+$column-xl-gap:             $column-gap !default;
+
+$column-count:              floor($grid-columns / ($grid-columns * .5)) !default;       // 2
+$column-xs-count:           floor($grid-columns / ($grid-columns * 1))  !default;       // 1
+$column-sm-count:           $column-count !default;
+$column-lg-count:           floor($grid-columns / ($grid-columns * .333333)); !default; // 3
+$column-xl-count:          floor($grid-columns / ($grid-columns * .25));     // 4
+
 // endregion ////////////////////////////////////////////////////////////   End Sizing and Spacing

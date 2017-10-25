@@ -42,6 +42,28 @@
   }
 }
 
+@mixin make-grid-flexbox-adjustments($bp) {
+  $infix: -#{$bp};
+  [class*="col-#{$bp}-"]  {
+    &.flex#{$infix}-grow {
+      // While max-width: none; makes logical sense here, we're using 100% to work around a FlexBox bug in IE10/11
+      // https://github.com/philipwalton/flexbugs#2-column-flex-items-set-to-align-itemscenter-overflow-their-container
+      max-width: 100%;
+      flex-grow: 1 !important;
+    }
+    &.flex#{$infix}-shrink {
+      // We are using flex-basis: auto/flex-shrink: 0 here instead of flex-shrink: 1 because of a Safari Bug
+      // We aren't combining into a flex: 0 0 auto !important; because of an IE10 bug
+      // https://github.com/philipwalton/flexbugs#1-minimum-content-sizing-of-flex-items-not-honored
+      // https://bugs.webkit.org/show_bug.cgi?id=146020
+      // https://github.com/philipwalton/flexbugs#13-importance-is-ignored-on-flex-basis-when-using-flex-shorthand
+      flex-shrink: 0 !important;
+      flex-basis: auto !important;
+      width: auto;
+    }
+  }
+}
+
 @mixin make-grid-column-base($bkps, $columns, $gutter) {
   // Common properties for all breakpoints
   %grid-column {
@@ -95,11 +117,10 @@
   }
   .columns {
     @if $viewport-size == xs {
-      $columns: floor($grid-columns / ($grid-columns * 1));
-      column-count: $columns;
-      column-gap: $grid-gutter-width / 2;
-      padding: 0;
-      width: 100%;
+      column-count:  $column-xs-count;
+      column-gap:    $column-xs-gap;
+      padding:       0;
+      width:         100%;
       margin-bottom: 0;
       [class*="col-"] {
         max-width: none;
@@ -109,18 +130,20 @@
       }
     }
     @if $viewport-size == sm {
-      $columns: floor($grid-columns / ($grid-columns * .5));
-      column-count: $columns;
+      @if ($column-sm-count != $column-xs-count) { column-count: $column-sm-count; }
+      @if ($column-sm-gap != $column-xs-gap) { column-gap: $column-sm-gap; }
     }
     @if $viewport-size == md {
+      @if ($column-count != $column-sm-count) { column-count: $column-count; }
+      @if ($column-gap != $column-sm-gap) { column-gap: $column-gap; }
     }
     @if $viewport-size == lg {
-      $columns: floor($grid-columns / ($grid-columns * .333333));
-      column-count: $columns;
+      @if ($column-count != $column-lg-count) { column-count: $column-lg-count; }
+      @if ($column-gap != $column-lg-gap) { column-gap: $column-lg-gap; }
     }
     @if $viewport-size == xl {
-      $columns: floor($grid-columns / ($grid-columns * .25));
-      column-count: $columns;
+      @if ($column-lg-count != $column-xl-count) { column-count: $column-xl-count; }
+      @if ($column-lg-gap != $column-xl-gap) { column-gap: $column-xl-gap; }
     }
   }
 }
@@ -136,6 +159,8 @@
     @include make-flex-grid($bp);
     // Multi-Column
     @include make-multi-column($bp);
+    // Flexbox Adjustment Classes
+    @include make-grid-flexbox-adjustments($bp);
   }
 }
 
