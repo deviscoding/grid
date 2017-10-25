@@ -26,9 +26,9 @@
 }
 
 @mixin make-offset($class, $col-number) {
-.col-#{$class}-offset-#{$col-number} {
-  margin-left: ((100% / $grid-columns) * $col-number);
-}
+  .col-#{$class}-offset-#{$col-number} {
+    margin-left: ((100% / $grid-columns) * $col-number);
+  }
 }
 
 @mixin make-offsets($class, $col-number: ($grid-columns - 1)) {
@@ -50,7 +50,6 @@
     min-height: 1px; // Prevent columns from collapsing when empty
     padding-right: $gutter / 2;
     padding-left:  $gutter / 2;
-    display: flex;
     flex-direction: column;
   }
 
