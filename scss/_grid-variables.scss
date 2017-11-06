@@ -20,9 +20,9 @@ $column-lg-gap:             $column-gap !default;
 $column-xl-gap:             $column-gap !default;
 
 $column-count:              floor($grid-columns / ($grid-columns * .5)) !default;       // 2
-$column-xs-count:           floor($grid-columns / ($grid-columns * 1)) !default;        // 1
+$column-xs-count:           floor($grid-columns / ($grid-columns * 1))  !default;       // 1
 $column-sm-count:           $column-count !default;
-$column-lg-count:           floor($grid-columns / ($grid-columns * .333333)) !default;  // 3
-$column-xl-count:           floor($grid-columns / ($grid-columns * .25)) !default;       // 4
+$column-lg-count:           floor($grid-columns / ($grid-columns * .333333)) !default; // 3
+$column-xl-count:           floor($grid-columns / ($grid-columns * .25)) !default;     // 4
 
 // endregion ////////////////////////////////////////////////////////////   End Sizing and Spacing
