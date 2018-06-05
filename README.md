@@ -1,3 +1,3 @@
-# StrapLess Grid
-Responsive grid classes utilizing CSS flexbox. Part of StrapLess framework, but usable as a standalone component.
+# DevIsCoding Grid
+Responsive grid classes utilizing CSS flexbox. Part of deviscoding/utility, but usable as a standalone component.
 

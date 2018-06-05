@@ -1,5 +1,5 @@
 {
-  "name": "strapless/grid",
+  "name": "deviscoding/grid",
   "description": "Responsive grid classes utilizing CSS flexbox. Part of StrapLess framework, but usable as a standalone component.",
   "keywords": [
       "responsive",
@@ -8,10 +8,11 @@
       "sass",
       "scss",
       "strapless",
+      "deviscoding",
       "css"
   ],
-  "homepage": "https://www.github.com/strapless/grid",
-  "version": "1.0.5",
+  "homepage": "https://www.github.com/deviscoding/grid",
+  "version": "1.0.6",
   "authors": [
       {
           "name": "Aaron M Jones",
@@ -19,7 +20,10 @@
       }
   ],
   "license": "MIT",
+  "replace": {
+    "strapless/grid": "^1.0"
+  },
   "require": {
-    "strapless/base": "^1.0"
+    "deviscoding/base": "^1.0"
   }
 }
