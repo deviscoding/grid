@@ -12,7 +12,7 @@
       "css"
   ],
   "homepage": "https://www.github.com/deviscoding/grid",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "authors": [
       {
           "name": "Aaron M Jones",
@@ -24,6 +24,7 @@
     "strapless/grid": "^1.0"
   },
   "require": {
-    "deviscoding/base": "^1.0"
+    "deviscoding/base": "^2.0",
+    "deviscoding/responsive": "^1.0"
   }
 }
